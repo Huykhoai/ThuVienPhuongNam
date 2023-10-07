@@ -103,6 +103,7 @@ public class PhieuMuonFragment extends Fragment {
     private void AnhXa(View view){
           listView = view.findViewById(R.id.listviewPhieumuon);
           fab = view.findViewById(R.id.floattingbtn);
+           phieuMuon = new PhieuMuon();
           thanhVienDao = new ThanhVienDao(getActivity());
           listThanhvien = thanhVienDao.getALL();
           sachDAO = new SachDAO(getActivity());
