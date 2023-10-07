@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Thêm Phiêu Mượn"
+         android:textSize="30dp"
+         android:layout_gravity="center"
+         android:id="@+id/dialog_phieumuon_title"/>
+     <com.google.android.material.textfield.TextInputLayout
+         android:id="@+id/dialog_tilMaphieumuon"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+         android:paddingLeft="10dp"
+         android:paddingRight="10dp">
+       <com.google.android.material.textfield.TextInputEditText
+           android:id="@+id/dialog_phieumuon_txtmaphiuemuon"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:hint="Mã Phiếu Mượn"
+           android:textSize="10dp"/>
+     </com.google.android.material.textfield.TextInputLayout>
+     <Spinner
+         android:id="@+id/dialog_spn_tenthanhvien"
+         android:layout_width="390dp"
+         android:layout_height="45dp"
+         android:paddingRight="10dp"
+         android:paddingLeft="10dp"/>
+    <Spinner
+        android:id="@+id/dialog_spn_tensach"
+        android:layout_width="390dp"
+        android:layout_height="45dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ngày Thuê: "
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/dialog_phieumuon_ngaythue"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Giá Thuê:   "
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/dialog_phieumuon_tienthue"
+            />
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/dialog_phieumuon_checkBox"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Đã trả sách"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Thêm"
+            android:backgroundTint="#ffde03"
+            android:textColor="#000000"
+            android:id="@+id/dialog_phieumuon_add"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Huỷ"
+            android:id="@+id/dialog_phieumuon_cancel"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:backgroundTint="#B00020"/>
+    </LinearLayout>
+</LinearLayout>

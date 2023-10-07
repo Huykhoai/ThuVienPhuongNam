@@ -1,0 +1,63 @@
+package com.example.thuvienphuongnam.Adapter;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import com.example.thuvienphuongnam.R;
+import com.example.thuvienphuongnam.model.Sach;
+
+import java.util.ArrayList;
+
+public class SachAdapter extends BaseAdapter {
+   private ArrayList<Sach> arrayList;
+   private Context context;
+
+    public SachAdapter(ArrayList<Sach> arrayList, Context context) {
+        this.arrayList = arrayList;
+        this.context = context;
+    }
+
+    @Override
+    public int getCount() {
+        return arrayList.size();
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return arrayList.get(i);
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return i;
+    }
+
+    @Override
+    public View getView(int i, View view, ViewGroup viewGroup) {
+        ViewHolder viewHolder = new ViewHolder();
+        if(view==null){
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.item_sach, null);
+            viewHolder.txtMaSach= view.findViewById(R.id.item_sach_masach);
+            viewHolder.txtTenSach= view.findViewById(R.id.item_sach_tensach);
+            viewHolder.txtGia= view.findViewById(R.id.item_sach_giathue);
+            viewHolder.txtMaLoai= view.findViewById(R.id.item_sach_maloai);
+            view.setTag(viewHolder);
+        }else {
+            viewHolder = (ViewHolder) view.getTag();
+        }
+        Sach sach = arrayList.get(i);
+        viewHolder.txtMaSach.setText(String.valueOf(sach.getMaSach()));
+        viewHolder.txtTenSach.setText(sach.getTenSach());
+        viewHolder.txtGia.setText(String.valueOf(sach.getGiasach()));
+        viewHolder.txtMaLoai.setText(String.valueOf(sach.getMaLoai()));
+        return view;
+    }
+    public class ViewHolder{
+        TextView txtMaSach,txtTenSach,txtGia,txtMaLoai;
+    }
+}

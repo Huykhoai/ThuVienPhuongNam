@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+ <group android:checkableBehavior="single">
+
+  <item android:id="@+id/mQLPhieuMuon"
+      android:title="Quản Lý Phiếu Mượn"
+      android:icon="@drawable/home"/>
+
+  <item android:id="@+id/mQLLoaiSach"
+      android:title="Quản Lý Loại Sách"
+      android:icon="@drawable/baseline_bookmarks_24"/>
+
+  <item android:id="@+id/mQLSach"
+      android:title="Quản Lý Sách"
+      android:icon="@drawable/ic_menu_gallery"/>
+
+  <item android:id="@+id/mQLThanhVien"
+      android:title="Quản Lý Thành Viên"
+      android:icon="@drawable/icon"/>
+  <item android:title="Thống kê">
+   <menu>
+    <item android:id="@+id/mQLTopSach"
+        android:icon="@drawable/baseline_upload_24"
+        android:title="Top 10 Sách mượn nhiều nhất"/>
+    <item android:id="@+id/mQLDoanhThu"
+        android:icon="@drawable/baseline_star_24"
+        android:title="Doanh Thu"/>
+   </menu>
+  </item>
+
+  <item android:title="Người Dùng">
+   <menu>
+    <item android:id="@+id/mQLThem"
+        android:title="Thêm Người Dùng"
+        android:icon="@drawable/home"
+        android:visible="false"/>
+    <item android:id="@+id/mQLMatKhau"
+        android:title="Đổi Mật Khẩu"
+        android:icon="@drawable/baseline_border_color_24"/>
+    <item android:id="@+id/mQLDangXuat"
+        android:title="Đăng Xuất "
+        android:icon="?android:attr/alertDialogIcon"/>
+   </menu>
+  </item>
+
+ </group>
+
+</menu>
