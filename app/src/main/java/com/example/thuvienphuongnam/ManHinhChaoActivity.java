@@ -22,11 +22,11 @@ public class ManHinhChaoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_man_hinh_chao);
 
-         dao = new ThuThuDao(getApplicationContext());
-         arrayList = dao.getAll();
-         if(arrayList.size() == 0){
-          dao.insertAdmin();
-         }
+        dao = new ThuThuDao(getApplicationContext());
+        arrayList = dao.getAll();
+        if (arrayList.size() == 0) {
+            dao.insertAdmin();
+        }
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override

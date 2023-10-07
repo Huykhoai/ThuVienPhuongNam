@@ -57,6 +57,20 @@
             android:hint="Mật khẩu" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/add_til_cccd"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/item_tv_cccd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="CCCD" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <LinearLayout
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"

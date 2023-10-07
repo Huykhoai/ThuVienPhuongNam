@@ -27,12 +27,15 @@ public class ThanhVienDao {
 
         values.put("hoten", tv.getHoTen());
         values.put("namsinh", tv.getNamSinh());
+        values.put("cccd", tv.getCccd());
         return db.insert("THANHVIEN", null, values);
     }
     public long update(ThanhVien tv){
         ContentValues values = new ContentValues();
         values.put("hoten", tv.getHoTen());
         values.put("namsinh", tv.getNamSinh());
+        values.put("cccd", tv.getCccd());
+
         return db.update("THANHVIEN",values,"matv=?",new String[]{String.valueOf(tv.getMaTV())});
     }
     public int delete(String id){
@@ -47,7 +50,11 @@ public class ThanhVienDao {
          ArrayList<ThanhVien> list = new ArrayList<>();
         Cursor cursor = db.rawQuery(sql,selectionArgs);
         while (cursor.moveToNext()){
-            list.add(new ThanhVien(cursor.getInt(0), cursor.getString(1), cursor.getString(2)));
+            list.add(new ThanhVien(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3)));
         }
         return list;
     }
