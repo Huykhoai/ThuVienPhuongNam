@@ -112,6 +112,13 @@ public class MatkhauFragment extends Fragment {
         }else {
             tilOldPass.setError("");
         }
+        if(edNewPass.getText().equals(edOldPass.getText().toString())){
+            tilNewpass.setError("Mật khẩu mới không được trùng vói mật khẩu cũ!");
+            temp++;
+            check=-1;
+        }else {
+            tilNewpass.setError("");
+        }
         if(edNewPass.getText().length()==0){
             tilNewpass.setError("Bạn chưa nhập mật khẩu mới!");
             temp++;

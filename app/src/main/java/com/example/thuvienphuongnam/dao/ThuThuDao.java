@@ -13,68 +13,59 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ThuThuDao {
-    DbHelper dbHelper;
+    DbHelper dbHelper ;
     SQLiteDatabase db;
-
-    public ThuThuDao(Context context) {
+    public ThuThuDao(Context context){
         dbHelper = new DbHelper(context);
         db = dbHelper.getReadableDatabase();
     }
-
     //dang nhap
-    public int CheckThuthu(String mtt, String matkhau) {
-        String sql = "SELECT * FROM THUTHU WHERE matt =? AND matkhau =?";
-        List<ThuThu> list = getData(sql, mtt, matkhau);
-        if (list.size() == 0) {
-            return -1;
-        }
-        return 1;
+    public int CheckThuthu(String mtt, String matkhau){
+       String sql = "SELECT * FROM THUTHU WHERE matt =? AND matkhau =?";
+       List<ThuThu> list =  getData(sql,mtt,matkhau);
+       if(list.size()==0){
+           return -1;
+       }
+       return 1;
     }
-
-    public List<ThuThu> getAll() {
+    public List<ThuThu> getAll(){
         String sql = "SELECT * FROM THUTHU";
         return getData(sql);
     }
-
-    public long insertAdmin() {
-        ContentValues values = new ContentValues();
-        values.put("matt", "admin");
-        values.put("hoten", "ADMIN");
-        values.put("matkhau", "admin");
-        return db.insert("THUTHU", null, values);
+    public long insertAdmin(){
+     ContentValues values= new ContentValues();
+     values.put("matt","admin");
+     values.put("hoten","ADMIN");
+     values.put("matkhau","admin");
+     return db.insert("THUTHU", null,values);
     }
-
-    public long insert(ThuThu thuThu) {
+    public long insert(ThuThu thuThu){
         ContentValues values = new ContentValues();
         values.put("matt", thuThu.getMaTT());
-        values.put("hoten", thuThu.getHoTen());
-        values.put("matkhau", thuThu.getMatKhau());
-        return db.insert("THUTHU", null, values);
+        values.put("hoten",thuThu.getHoTen());
+        values.put("matkhau",thuThu.getMatKhau());
+        return db.insert("THUTHU",null, values);
     }
-
-    public long update(ThuThu thuThu) {
+    public long update(ThuThu thuThu){
         ContentValues values = new ContentValues();
         values.put("matt", thuThu.getMaTT());
-        values.put("hoten", thuThu.getHoTen());
-        values.put("matkhau", thuThu.getMatKhau());
-        return db.update("THUTHU", values, "matt=?", new String[]{String.valueOf(thuThu.getMaTT())});
+        values.put("hoten",thuThu.getHoTen());
+        values.put("matkhau",thuThu.getMatKhau());
+       return db.update("THUTHU",values,"matt=?",new String[]{String.valueOf(thuThu.getMaTT())});
     }
-
-    public int delete(String id) {
-        return db.delete("THUTHU", "matkhau=?", new String[]{id});
+    public int delete(String id){
+        return db.delete("THUTHU","matkhau=?",new String[]{id});
     }
-
-    public ThuThu getID(String id) {
+    public ThuThu getID(String id){
         String sql = "SELECT * FROM THUTHU WHERE matt=?";
-        List<ThuThu> list = getData(sql, id);
+        List<ThuThu> list = getData(sql,id);
         return list.get(0);
     }
-
     @SuppressLint("Range")
-    public List<ThuThu> getData(String sql, String... selectionArgs) {
+    public List<ThuThu> getData(String sql, String...selectionArgs){
         List<ThuThu> list = new ArrayList<ThuThu>();
-        Cursor c = db.rawQuery(sql, selectionArgs);
-        while (c.moveToNext()) {
+        Cursor c = db.rawQuery(sql,selectionArgs);
+        while (c.moveToNext()){
             ThuThu obj = new ThuThu();
             obj.maTT = c.getString(c.getColumnIndex("matt"));
             obj.hoTen = c.getString(c.getColumnIndex("hoten"));

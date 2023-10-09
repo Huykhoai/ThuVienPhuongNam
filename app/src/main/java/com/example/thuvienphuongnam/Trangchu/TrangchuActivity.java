@@ -15,8 +15,10 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.thuvienphuongnam.R;
+import com.example.thuvienphuongnam.dao.ThuThuDao;
 import com.example.thuvienphuongnam.fragment.DangxuatFragment;
 import com.example.thuvienphuongnam.fragment.DoanhthuFragment;
 import com.example.thuvienphuongnam.fragment.LoaiSachFragment;
@@ -26,12 +28,21 @@ import com.example.thuvienphuongnam.fragment.SachFragment;
 import com.example.thuvienphuongnam.fragment.ThanhvienFragment;
 import com.example.thuvienphuongnam.fragment.ThuthuFragment;
 import com.example.thuvienphuongnam.fragment.TopFragment;
+import com.example.thuvienphuongnam.model.ThuThu;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TrangchuActivity extends AppCompatActivity {
       Toolbar toolbar;
       NavigationView navigationView;
       DrawerLayout drawerLayout;
+      List<ThuThu> thuthuList;
+      ThuThuDao thuThuDao;
+      ThuThu thuthu;
+      TextView nameuser;
+      View view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +60,10 @@ public class TrangchuActivity extends AppCompatActivity {
         replaceFragment(new SachFragment());
         navigationView.getMenu().findItem(R.id.mQLSach).setChecked(true);
         toolbar.setNavigationIcon(R.drawable.baseline_menu_24);
-
+        thuthuList = new ArrayList<>();
+        thuThuDao = new ThuThuDao(getApplicationContext());
+        view =navigationView.getHeaderView(0);
+        nameuser = view.findViewById(R.id.login_nameuser);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,8 +123,17 @@ public class TrangchuActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String user = intent.getStringExtra("user");
-        if(user.equalsIgnoreCase("admin")){
+        thuthuList = thuThuDao.getAll();
+        if(user!= null && user.equalsIgnoreCase("admin")){
              navigationView.getMenu().findItem(R.id.mQLThem).setVisible(true);
+        }else {
+            navigationView.getMenu().findItem(R.id.mQLThem).setVisible(false);
+        }
+        for (int i=0;i<thuthuList.size();i++){
+           if(thuthuList.get(i).getMaTT().equals(user)){
+             nameuser.setText("Xin Chào Thủ Thư: "+thuthuList.get(i).getHoTen());
+             return;
+           }
         }
     }
     private void replaceFragment(Fragment fragment) {

@@ -183,7 +183,10 @@ public class ThuthuFragment extends Fragment {
             edMatt.setEnabled(false);
             edName.setText(thuThu.getHoTen());
             edPass.setText(thuThu.getMatKhau());
-
+            if (thuThu.getMaTT().equals("admin")){
+                Toast.makeText(getActivity(), "Không thể xóa hoặc sửa admin", Toast.LENGTH_SHORT).show();
+                return;
+            }
             btnAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -209,12 +212,13 @@ public class ThuthuFragment extends Fragment {
                     PhieuMuonDao phieuMuonDao = new PhieuMuonDao(getActivity());
                     ArrayList<PhieuMuon> phiemuonList = phieuMuonDao.getDanhsachPhieumuon();
                     for (int i=0;i<phiemuonList.size();i++){
-                        if(thuThu.getMaTT() == phiemuonList.get(i).getMaTT())  {
+                        if(thuThu.getMaTT() == phiemuonList.get(i).getMaTT()){
                             temp++;
                             Toast.makeText(getActivity(), "Không thể xoá thủ thư có trong phiếu mượn", Toast.LENGTH_SHORT).show();
                             break;
                         }
                     }
+
                     if(temp==0){
                         if(thuThuDao.delete(thuThu.getMaTT())>0){
                             Toast.makeText(getActivity(), "Xoá thành công", Toast.LENGTH_SHORT).show();
