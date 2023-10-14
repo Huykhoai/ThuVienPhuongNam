@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbHelper extends SQLiteOpenHelper {
     public DbHelper(Context context) {
-        super(context, "DANGKIMONHOC", null, 5);
+        super(context, "DANGKIMONHOC", null, 8);
     }
 
     @Override
@@ -20,7 +20,7 @@ public class DbHelper extends SQLiteOpenHelper {
         String dbLoaiSach = "CREATE TABLE LOAISACH(maloai integer primary key , tenloai text,nhasx text)";
         sqLiteDatabase.execSQL(dbLoaiSach);
 
-        String dbSach = "CREATE TABLE SACH(masach integer primary key , tensach text, giathue integer,maloai integer references LOAISACH(maloai))";
+        String dbSach = "CREATE TABLE SACH(masach integer primary key , tensach text, giathue integer,maloai integer references LOAISACH(maloai),namXB ingteger)";
         sqLiteDatabase.execSQL(dbSach);
 
         String dbPhieuMuon = "CREATE TABLE PHIEUMUON(mapm integer primary key ,matv integer references THANHVIEN(matv),matt text references THUTHU(matt), masach integer references SACH(masach), ngay text, trasach integer, tienthue integer)";
@@ -28,7 +28,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         //data mau
         sqLiteDatabase.execSQL("INSERT INTO LOAISACH VALUES (1, 'Thieu Nhi', 'Kim Dong'),(2,'Tinh Cam','Kim lan'), (3,'Giao Khoa','Huy nguyen')");
-        sqLiteDatabase.execSQL("INSERT INTO SACH VALUES (1,'Doremon', 2500, 1), (2,'Thang cuoi', 1000, 1),(3,'Lap trinh android', 2000,3)");
+        sqLiteDatabase.execSQL("INSERT INTO SACH VALUES (1,'Doremon', 2500,1,2020), (2,'Thang cuoi', 1000, 1,2021),(3,'Lap trinh android', 2000,3, 2023)");
 
         //sqLiteDatabase.execSQL("INSERT INTO THUTHU VALUES('duyle', 'Duy Le', '123456')");
 

@@ -46,18 +46,20 @@ public class SachAdapter extends BaseAdapter {
             viewHolder.txtTenSach= view.findViewById(R.id.item_sach_tensach);
             viewHolder.txtGia= view.findViewById(R.id.item_sach_giathue);
             viewHolder.txtMaLoai= view.findViewById(R.id.item_sach_maloai);
+            viewHolder.txtNamXB= view.findViewById(R.id.item_sach_namXB);
             view.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) view.getTag();
         }
         Sach sach = arrayList.get(i);
-        viewHolder.txtMaSach.setText(String.valueOf(sach.getMaSach()));
-        viewHolder.txtTenSach.setText(sach.getTenSach());
-        viewHolder.txtGia.setText(String.valueOf(sach.getGiasach()));
-        viewHolder.txtMaLoai.setText(String.valueOf(sach.getMaLoai()));
+        viewHolder.txtMaSach.setText("Mã: "+String.valueOf(sach.getMaSach()));
+        viewHolder.txtTenSach.setText("Ten: "+sach.getTenSach());
+        viewHolder.txtGia.setText("Giá: "+String.valueOf(sach.getGiasach()));
+        viewHolder.txtMaLoai.setText("Mã Loại: "+ String.valueOf(sach.getMaLoai()));
+        viewHolder.txtNamXB.setText("Năm XB: "+String.valueOf(sach.getNamXB()));
         return view;
     }
     public class ViewHolder{
-        TextView txtMaSach,txtTenSach,txtGia,txtMaLoai;
+        TextView txtMaSach,txtTenSach,txtGia,txtNamXB,txtMaLoai;
     }
 }

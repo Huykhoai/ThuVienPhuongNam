@@ -6,18 +6,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.SachFragment">
 
- <ListView
-     android:layout_width="match_parent"
-     android:layout_height="match_parent"
-     android:id="@+id/listviewSach"/>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_sach"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_add_to_photos_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search..."
+            android:id="@+id/search"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/listviewSach"/>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_sach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_add_to_photos_24"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="end|bottom"/>
+        </FrameLayout>
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

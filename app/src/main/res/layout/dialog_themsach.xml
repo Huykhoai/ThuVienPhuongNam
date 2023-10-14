@@ -56,7 +56,19 @@
             android:layout_height="wrap_content"
             android:hint="Giá Thuế" />
     </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dialog_sach_til_namXB"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dialog_sach_txtNamXB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Năm XB" />
+    </com.google.android.material.textfield.TextInputLayout>
     <Spinner
         android:id="@+id/dialog_spn_loaisach"
         android:layout_width="391dp"

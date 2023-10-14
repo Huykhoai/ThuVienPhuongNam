@@ -7,7 +7,9 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,9 +45,10 @@ public class SachFragment extends Fragment {
     Sach sach;
     SachDAO dao;
     ArrayList<Sach> arrayList;
+    ArrayList<Sach> tempArrayListSach;
     SachAdapter adapterSach;
-    EditText edmaSach,edTenSach,edGiaThue;
-    TextInputLayout tilmasach,tilname,tilgiathue;
+    EditText edmaSach,edTenSach,edGiaThue, edNamXB,search;
+    TextInputLayout tilmasach,tilname,tilgiathue,tilNamXB;
     int a;
     int temp=0;
     String maloaiSach;
@@ -84,11 +87,36 @@ public class SachFragment extends Fragment {
     private void Anhxa(View view){
         listView = view.findViewById(R.id.listviewSach);
         fab = view.findViewById(R.id.fab_sach);
+        dao = new SachDAO(getActivity());
+        tempArrayListSach = dao.getAll();
         listLoaisach = new ArrayList<>();
         loaiSachDao =new LoaiSAchDao(getActivity());
         listLoaisach = loaiSachDao.getAll();
         phieuMuonDao = new PhieuMuonDao(getActivity());
         listPhieuMuon = phieuMuonDao.getDanhsachPhieumuon();
+        search = view.findViewById(R.id.search);
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                arrayList.clear();
+                for (Sach sach: tempArrayListSach) {
+                    if(String.valueOf(sach.getMaSach()).contains(charSequence)){
+                        arrayList.add(sach);
+                    }
+                }
+                adapterSach.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -141,17 +169,18 @@ public class SachFragment extends Fragment {
         edmaSach = dialog.findViewById(R.id.dialog_sach_txtmasach);
         edTenSach = dialog.findViewById(R.id.dialog_sach_txtname);
         edGiaThue = dialog.findViewById(R.id.dialog_sach_txtgiathue);
+        edNamXB = dialog.findViewById(R.id.dialog_sach_txtNamXB);
         Spinner spinner = (Spinner) dialog.findViewById(R.id.dialog_spn_loaisach);
 
         tilmasach = dialog.findViewById(R.id.dialog_sach_til_masach);
         tilname = dialog.findViewById(R.id.dialog_sach_til_name);
         tilgiathue = dialog.findViewById(R.id.dialog_sach_til_giathue);
-
+        tilNamXB = dialog.findViewById(R.id.dialog_sach_til_namXB);
         Button btnadd = dialog.findViewById(R.id.dialog_sach_add);
         Button btncancel = dialog.findViewById(R.id.dialog_sach_cancel);
 
         edGiaThue.setInputType(InputType.TYPE_CLASS_NUMBER);
-
+        edNamXB.setInputType(InputType.TYPE_CLASS_NUMBER);
         spinnerAdapter = new SpinnerAdapterLoaiSach(getContext(),listLoaisach);
         spinner.setAdapter(spinnerAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -182,8 +211,9 @@ public class SachFragment extends Fragment {
                 validate();
              if(temp==0){
                sach.setTenSach(edTenSach.getText().toString());
-               sach.setGiasach(Integer.parseInt(String.valueOf(edGiaThue.getText().toString())));
+               sach.setGiasach(Integer.parseInt(edGiaThue.getText().toString()));
                sach.setMaLoai(Integer.parseInt(maloaiSach));
+               sach.setNamXB(Integer.parseInt(edNamXB.getText().toString()));
                if(dao.insert(sach)>0){
                    Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                    dialog.dismiss();
@@ -212,6 +242,7 @@ public class SachFragment extends Fragment {
             edmaSach.setEnabled(false);
             edTenSach.setText(sach.getTenSach());
             edGiaThue.setText(String.valueOf(sach.getGiasach()));
+            edNamXB.setText(String.valueOf(sach.getNamXB()));
             for (int i=0; i<spinner.getCount();i++){
                if(arrayList.get(a).getMaLoai()== listLoaisach.get(i).getMaLoai() ){
                    spinner.setSelection(i);
@@ -225,6 +256,7 @@ public class SachFragment extends Fragment {
                        sach.setTenSach(edTenSach.getText().toString());
                        sach.setGiasach(Integer.parseInt(edGiaThue.getText().toString()));
                        sach.setMaLoai(Integer.parseInt(maloaiSach));
+                       sach.setNamXB(Integer.parseInt(edNamXB.getText().toString()));
                        if (dao.update(sach)>0){
                            Toast.makeText(getActivity(), "Sửa thành công", Toast.LENGTH_SHORT).show();
                            dialog.dismiss();
@@ -270,6 +302,12 @@ public class SachFragment extends Fragment {
             temp++;
         }else{
             tilgiathue.setError("");
+        }
+        if(edNamXB.getText().length()==0){
+            tilNamXB.setError("Năm xuất bản không được để trống");
+            temp++;
+        }else{
+            tilNamXB.setError("");
         }
     }
 }
