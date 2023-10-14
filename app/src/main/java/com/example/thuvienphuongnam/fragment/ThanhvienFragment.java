@@ -7,7 +7,9 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +39,7 @@ public class ThanhvienFragment extends Fragment {
     FloatingActionButton fab;
     ListView listView;
     ArrayList<ThanhVien> listTV;
+    ArrayList<ThanhVien> tempListTv;
     ThanhVienAdapter thanhVienAdapter;
     ThanhVienDao thanhVienDao;
     ThanhVien thanhVien;
@@ -45,7 +48,7 @@ public class ThanhvienFragment extends Fragment {
     EditText edMatv;
     EditText edTenTv;
     EditText edNamSinh;
-    EditText edCccd;
+    EditText search;
     TextInputLayout tilMatv, tilName, tilNamsinh, tvCccd;
 
     ArrayList<PhieuMuon> listPhieumuon;
@@ -112,12 +115,13 @@ public class ThanhvienFragment extends Fragment {
         edMatv = dialog.findViewById(R.id.item_txtnameuser);
         edTenTv = dialog.findViewById(R.id.item_txtname);
         edNamSinh = dialog.findViewById(R.id.item_txtpass);
-        edCccd = dialog.findViewById(R.id.item_tv_cccd);
+        //edCccd = dialog.findViewById(R.id.item_tv_cccd);
+
 
         tilMatv = dialog.findViewById(R.id.add_til_username);
         tilName = dialog.findViewById(R.id.add_til_name);
         tilNamsinh = dialog.findViewById(R.id.add_til_pass);
-        tvCccd = dialog.findViewById(R.id.add_til_cccd);
+       // tvCccd = dialog.findViewById(R.id.add_til_cccd);
 
         Button btnAdd = dialog.findViewById(R.id.dialog_add_add);
         Button btnCancel = dialog.findViewById(R.id.dialog_add_cancel);
@@ -148,7 +152,7 @@ public class ThanhvienFragment extends Fragment {
                     if (temp == 0) {
                         thanhVien.setHoTen(edTenTv.getText().toString());
                         thanhVien.setNamSinh(String.valueOf(edNamSinh.getText().toString()));
-                        thanhVien.setCccd(edCccd.getText().toString());
+                        //thanhVien.setCccd(edCccd.getText().toString());
                         if (thanhVienDao.insert(thanhVien) > 0) {
                             Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
@@ -177,7 +181,7 @@ public class ThanhvienFragment extends Fragment {
             edMatv.setEnabled(false);
             edTenTv.setText(thanhVien.getHoTen());
             edNamSinh.setText(String.valueOf(thanhVien.getNamSinh()));
-            edCccd.setText(thanhVien.getCccd());
+            //edCccd.setText(thanhVien.getCccd());
 
             btnAdd.setText("Sửa");
             btnCancel.setText("Xóa");
@@ -189,7 +193,7 @@ public class ThanhvienFragment extends Fragment {
                     if (temp == 0) {
                         thanhVien.setHoTen(edTenTv.getText().toString());
                         thanhVien.setNamSinh(String.valueOf(edNamSinh.getText().toString()));
-                        thanhVien.setCccd(edCccd.getText().toString());
+                        //thanhVien.setCccd(edCccd.getText().toString());
 
                         if (thanhVienDao.update(thanhVien) > 0) {
                             Toast.makeText(getActivity(), "Sửa thành công", Toast.LENGTH_SHORT).show();
@@ -231,6 +235,31 @@ public class ThanhvienFragment extends Fragment {
         listView = view.findViewById(R.id.qlthanhvien_listview);
         phieuMuonDao = new PhieuMuonDao(getContext());
         listPhieumuon = phieuMuonDao.getDanhsachPhieumuon();
+        thanhVienDao = new ThanhVienDao(getActivity());
+        tempListTv = thanhVienDao.getALL();
+        search = view.findViewById(R.id.saerch);
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                listTV.clear();
+                for (ThanhVien tv: tempListTv) {
+                    if(String.valueOf(tv.getMaTV()).contains(charSequence.toString())){
+                        listTV.add(tv);
+                    }
+                }
+                thanhVienAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -260,11 +289,11 @@ public class ThanhvienFragment extends Fragment {
         } else {
             tilNamsinh.setError("");
         }
-        if (edCccd.getText().length() == 0) {
-            tvCccd.setError("CCCD không được để trống");
-            temp++;
-        } else {
-            tvCccd.setError("");
-        }
+//        if (edCccd.getText().length() == 0) {
+//            tvCccd.setError("CCCD không được để trống");
+//            temp++;
+//        } else {
+//            tvCccd.setError("");
+//        }
     }
 }

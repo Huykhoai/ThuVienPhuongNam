@@ -246,7 +246,7 @@ public class PhieuMuonFragment extends Fragment {
            if(phieuMuon.getTraSach()==1){
                checkBox.setChecked(true);
            }else {
-               checkBox.setEnabled(false);
+               checkBox.setChecked(false);
            }
 
            for (int i=0;i<spn_tenThanhVien.getCount();i++){
@@ -262,7 +262,6 @@ public class PhieuMuonFragment extends Fragment {
            btnAdd.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
-
                    phieuMuon.setMaTT(user);
                    phieuMuon.setMaPM(Integer.parseInt(edMaphieumuon.getText().toString()));
                    phieuMuon.setMaTV(Integer.parseInt(maThanhVien));

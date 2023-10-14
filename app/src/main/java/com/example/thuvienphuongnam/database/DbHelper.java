@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbHelper extends SQLiteOpenHelper {
     public DbHelper(Context context) {
-        super(context, "DANGKIMONHOC", null, 3);
+        super(context, "DANGKIMONHOC", null, 5);
     }
 
     @Override
@@ -14,7 +14,7 @@ public class DbHelper extends SQLiteOpenHelper {
         String dbThuThu = "CREATE TABLE THUTHU(matt text primary key, hoten text, matkhau text)";
         sqLiteDatabase.execSQL(dbThuThu);
 
-        String dbThanhVien = "CREATE TABLE THANHVIEN(matv integer primary key , hoten text, namsinh text, cccd text)";
+        String dbThanhVien = "CREATE TABLE THANHVIEN(matv integer primary key , hoten text, namsinh text)";
         sqLiteDatabase.execSQL(dbThanhVien);
 
         String dbLoaiSach = "CREATE TABLE LOAISACH(maloai integer primary key , tenloai text,nhasx text)";
@@ -30,10 +30,10 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO LOAISACH VALUES (1, 'Thieu Nhi', 'Kim Dong'),(2,'Tinh Cam','Kim lan'), (3,'Giao Khoa','Huy nguyen')");
         sqLiteDatabase.execSQL("INSERT INTO SACH VALUES (1,'Doremon', 2500, 1), (2,'Thang cuoi', 1000, 1),(3,'Lap trinh android', 2000,3)");
 
-        sqLiteDatabase.execSQL("INSERT INTO THUTHU VALUES('duyle', 'Duy Le', '123456')");
+        //sqLiteDatabase.execSQL("INSERT INTO THUTHU VALUES('duyle', 'Duy Le', '123456')");
 
-        sqLiteDatabase.execSQL("INSERT INTO THANHVIEN VALUES(1, 'Nguyen Quang Huy', '2003', '099991020')");
-        sqLiteDatabase.execSQL("INSERT INTO THANHVIEN VALUES(2, 'Le Tuan Anh', '2003', '089900192')");
+        sqLiteDatabase.execSQL("INSERT INTO THANHVIEN VALUES(1, 'Nguyen Quang Huy', '2003')");
+        sqLiteDatabase.execSQL("INSERT INTO THANHVIEN VALUES(2, 'Le Tuan Anh', '2003')");
 
         sqLiteDatabase.execSQL("INSERT INTO PHIEUMUON VALUES(1,1,'thuthu02',2,'22-03-2023', 1, 2500)");
     }

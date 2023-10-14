@@ -45,7 +45,7 @@ public class ThanhVienAdapter extends BaseAdapter {
             viewHolder.txtMaTv = view.findViewById(R.id.item_lv_maloai);
             viewHolder.txtTentv = view.findViewById(R.id.item_lv_name);
             viewHolder.txtNamsinh = view.findViewById(R.id.item_lv_theloai);
-            viewHolder.tvCccd = view.findViewById(R.id.item_lv_cccd);
+//            viewHolder.tvCccd = view.findViewById(R.id.item_lv_cccd);
 
             viewHolder.temp1 = view.findViewById(R.id.temp_1);
             viewHolder.temp2 = view.findViewById(R.id.temp_2);
@@ -58,7 +58,7 @@ public class ThanhVienAdapter extends BaseAdapter {
         viewHolder.txtMaTv.setText(String.valueOf(tv.getMaTV()));
         viewHolder.txtTentv.setText(tv.getHoTen());
         viewHolder.txtNamsinh.setText(tv.getNamSinh());
-        viewHolder.tvCccd.setText(tv.getCccd());
+        //viewHolder.tvCccd.setText(tv.getCccd());
 
         viewHolder.temp1.setText("Mã TV: ");
         viewHolder.temp2.setText("Tên TV: ");

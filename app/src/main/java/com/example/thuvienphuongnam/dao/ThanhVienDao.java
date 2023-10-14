@@ -27,14 +27,14 @@ public class ThanhVienDao {
 
         values.put("hoten", tv.getHoTen());
         values.put("namsinh", tv.getNamSinh());
-        values.put("cccd", tv.getCccd());
+       // values.put("cccd", tv.getCccd());
         return db.insert("THANHVIEN", null, values);
     }
     public long update(ThanhVien tv){
         ContentValues values = new ContentValues();
         values.put("hoten", tv.getHoTen());
         values.put("namsinh", tv.getNamSinh());
-        values.put("cccd", tv.getCccd());
+        //values.put("cccd", tv.getCccd());
 
         return db.update("THANHVIEN",values,"matv=?",new String[]{String.valueOf(tv.getMaTV())});
     }
@@ -53,8 +53,9 @@ public class ThanhVienDao {
             list.add(new ThanhVien(
                     cursor.getInt(0),
                     cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getString(3)));
+                    cursor.getString(2)
+                    )
+            );
         }
         return list;
     }
