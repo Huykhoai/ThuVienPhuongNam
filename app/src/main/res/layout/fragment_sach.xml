@@ -15,6 +15,22 @@
             android:layout_height="wrap_content"
             android:hint="Search..."
             android:id="@+id/search"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sap xep"
+                android:id="@+id/sapxep"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sap xep ma"
+                android:id="@+id/sapxepTheoMa"/>
+        </LinearLayout>
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">

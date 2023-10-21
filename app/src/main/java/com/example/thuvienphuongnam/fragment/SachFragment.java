@@ -37,6 +37,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 public class SachFragment extends Fragment {
@@ -57,6 +59,7 @@ public class SachFragment extends Fragment {
     ArrayList<PhieuMuon> listPhieuMuon;
     PhieuMuonDao phieuMuonDao;
     SpinnerAdapterLoaiSach spinnerAdapter;
+    Button btnSapxep,btnSapxepMa;
     public SachFragment() {
         // Required empty public constructor
     }
@@ -94,6 +97,32 @@ public class SachFragment extends Fragment {
         listLoaisach = loaiSachDao.getAll();
         phieuMuonDao = new PhieuMuonDao(getActivity());
         listPhieuMuon = phieuMuonDao.getDanhsachPhieumuon();
+        btnSapxepMa = view.findViewById(R.id.sapxepTheoMa);
+        btnSapxepMa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Collections.sort(arrayList, new Comparator<Sach>() {
+                    @Override
+                    public int compare(Sach sach, Sach t1) {
+                        return  sach.getGiasach()- t1.getGiasach();
+                    }
+                });
+                adapterSach.notifyDataSetChanged();
+            }
+        });
+        btnSapxep = view.findViewById(R.id.sapxep);
+        btnSapxep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Collections.sort(arrayList, new Comparator<Sach>() {
+                    @Override
+                    public int compare(Sach sach, Sach t1) {
+                        return sach.getTenSach().compareTo(t1.getTenSach());
+                    }
+                });
+                adapterSach.notifyDataSetChanged();
+            }
+        });
         search = view.findViewById(R.id.search);
         search.addTextChangedListener(new TextWatcher() {
             @Override
